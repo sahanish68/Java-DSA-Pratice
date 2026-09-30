@@ -13,7 +13,7 @@ public class printPermutation {
 
     }
     public static void main(String[] args) {
-        String str="ABCD";
+        String str="ABC";
 
         printPer(str, "", 0);
         
