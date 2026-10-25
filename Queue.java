@@ -6,7 +6,7 @@ public class Queue {
         static int arr[];
         static int size;
         static int rear=-1;
-
+        static int front=-1;
         QueueY(int n){
                arr=new int[n];
                this.size=n;
@@ -16,19 +16,24 @@ public class Queue {
 
         //empty
         public static boolean isEmpty(){
-            return rear==-1;
+            return rear==-1 && front==-1;
         }
+        public static boolean isFull(){
+            return (rear+1)%size==front;
 
              //add function
 
 
         public static void add(int data){ 
-            if (rear==size-1){
+            if (isFull()){
                 System.out.println("Queue is fulled");
                 return ;
 
             }
-            rear++;
+            if(front==-1){
+                front=0;
+            }
+            rear=(rear+1)%size;
             arr[rear]=data;
 
         }   
@@ -40,12 +45,10 @@ public class Queue {
                 System.out.println("empty queue");
                 return -1;
             }
-            int front=arr[0];
+            int result=arr[front];
             
-            for(int i=0; i<rear;i++){
-                arr[i]=arr[i+1];
-
-            }
+            if(front==rear){
+                front=rear=-1;
             rear--;
             return front;
 
